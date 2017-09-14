@@ -10,3 +10,8 @@ export RBENV_ROOT=/usr/local/var/rbenv
 
 alias ls='ls -lAh'
 alias gs='git status'
+
+function xc() {  
+  xcode=`xcode-select -p | sed 's/\(.*\)\(Xcode.*\.app\).*/\2/'`
+  find "$1" -name "*.xcodeproj" -maxdepth 1 | xargs -I file open -a $xcode "file" 
+}
