@@ -104,5 +104,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias python="python3"
-alias ls='ls -lAh'
 alias gs='git status'
