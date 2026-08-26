@@ -102,6 +102,29 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias ls="ls -Glah"
 alias python="python3"
 alias gs='git status'
+export OPENSSL_DIR=$(brew --prefix openssl)
+export OPENSSL_LIB_DIR=$(brew --prefix openssl)/lib
+export OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include
+export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
+
+# pnpm
+export PNPM_HOME="/Users/tommasopiazza/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="$HOME/Code/Proton/monorepo/tommaso/bin:$HOME/.local/bin:$PATH"
+
+# Bare `tmux` attaches to your last session (or creates one if none exist).
+# `tmux <args>` (e.g. tmux ls, tmux new -s foo) behaves normally.
+tmux() {
+  if [[ $# -eq 0 && -z "$TMUX" ]]; then
+    command tmux attach 2>/dev/null || command tmux new-session
+  else
+    command tmux "$@"
+  fi
+}

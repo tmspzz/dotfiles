@@ -1,0 +1,57 @@
+# Ghostty configuration
+# Docs: https://ghostty.org/docs/config
+
+# Font — the Nerd Font Mono variant so icons stay single-cell width
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
+
+# Theme — GitHub Dark (https://terminalcolors.com/themes/github/dark/).
+# Ghostty ships this palette built-in. (Neovim still uses tokyonight while editing.)
+theme = GitHub Dark
+
+# Translucent, blurred background (macOS)
+background-opacity = 0.9
+background-blur = 20
+
+# Make the macOS Option key send Alt/Meta (needed for some Neovim keybinds)
+macos-option-as-alt = true
+
+# Cosmetics
+window-padding-x = 8
+window-padding-y = 8
+cursor-style = block
+mouse-hide-while-typing = true
+
+# macOS muscle-memory in Neovim. Each sends <Esc> first so it works from insert,
+# normal or visual mode. NOTE: these are terminal-wide, so they also fire at the
+# shell prompt (where they just type the raw keys) -- harmless but expect it.
+# Ctrl+S / u / <C-r> / ggVG are the native equivalents and work in any terminal.
+
+keybind = cmd+s=text:\x1b:w\r
+# Cmd+S  -> <Esc>:w<CR>            save
+
+keybind = cmd+a=text:\x1bggVG
+# Cmd+A  -> <Esc>gg V G           select all (linewise visual over whole file)
+
+keybind = cmd+z=text:\x1bu
+# Cmd+Z  -> <Esc>u                undo
+
+keybind = cmd+shift+z=text:\x1b\x12
+# Cmd+Shift+Z -> <Esc><C-r>       redo
+
+keybind = cmd+f=text:\x1b/
+# Cmd+F  -> <Esc>/                find in current file (type query, Enter)
+
+keybind = cmd+slash=text:\x1f
+# Cmd+/  -> sends <C-_> (0x1f); mapped in Neovim keymaps.lua to toggle comment
+#           (mode-aware: whole line in normal, selection in visual)
+
+keybind = cmd+w=close_surface
+# Cmd+W  -> close the Ghostty tab/split (standard macOS behaviour)
+keybind = cmd+shift+w=text:\x1b:bd\r
+# Cmd+Shift+W -> <Esc>:bd<CR>     close the current Neovim buffer
+
+# Cmd+C / Cmd+V use Ghostty's defaults (copy terminal selection / paste).
+# Note: making Cmd+C also copy a Neovim VISUAL selection would need the
+# `performable:` keybind flag, which Ghostty 1.3.1 doesn't support. Until then,
+# copy in Neovim with `y` (already synced to the macOS clipboard).

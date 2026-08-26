@@ -1,0 +1,4 @@
+*.bak-*
+.DS_Store
+# tmux downloads plugins here at runtime; do not track them
+.config/tmux/plugins/
