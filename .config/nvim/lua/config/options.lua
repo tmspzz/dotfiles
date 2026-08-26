@@ -23,3 +23,8 @@ opt.sidescrolloff = 8
 -- so there we fall back to its 256-color palette instead of sending broken
 -- truecolor codes. Pairs with the conditional colorscheme in lua/plugins/colorscheme.lua.
 opt.termguicolors = vim.env.COLORTERM == "truecolor" or vim.env.COLORTERM == "24bit"
+
+-- Only run Prettier where the project actually has a Prettier config file.
+-- Keeps conform.nvim from reformatting repos that use Biome, oxfmt, or nothing
+-- at all. (Rust is unaffected: rustfmt is driven by rust-analyzer.)
+vim.g.lazyvim_prettier_needs_config = true

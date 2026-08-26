@@ -20,6 +20,22 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- Rust language support: rustaceanvim (rust-analyzer), crates.nvim, etc.
     { import = "lazyvim.plugins.extras.lang.rust" },
+    -- TypeScript / JavaScript: vtsls LSP, inlay hints, move-to-file refactors.
+    -- Set `vim.g.lazyvim_ts_lsp = "tsgo"` in options.lua to try the Go-based server.
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- JSON schemas for package.json / tsconfig.json / etc. (jsonls + SchemaStore).
+    { import = "lazyvim.plugins.extras.lang.json" },
+    -- ESLint as an LSP (diagnostics + `source.fixAll` on save).
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+    -- Prettier via conform.nvim (only in projects that have a prettier config,
+    -- see `lazyvim_prettier_needs_config` in options.lua).
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    -- Debugging: nvim-dap + UI. Brings js-debug-adapter for Node/browser, and
+    -- also wires up codelldb for Rust via rustaceanvim.
+    { import = "lazyvim.plugins.extras.dap.core" },
+    -- Test runner UI (neotest). Rust works out of the box via rustaceanvim;
+    -- for JS/TS add an adapter such as neotest-vitest or neotest-jest.
+    { import = "lazyvim.plugins.extras.test.core" },
     -- Code outline / symbol map (functions, structs, ...) in a right-side panel.
     { import = "lazyvim.plugins.extras.editor.outline" },
     -- import/override with your plugins
