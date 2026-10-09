@@ -44,6 +44,11 @@ so a second run does not lose your current setup.
 - **zsh** (`.zshrc`, `tmpz.zsh-theme`): the `tmpz` prompt, plus a `tmux` function
   that attaches to the last session instead of creating a new one.
 
+- **Coding agents**: Claude Code, Codex and pi from brew. All three read
+  `.claude/AGENTS.md` and get the same skills. Claude Code also gets pstack,
+  plannotator, mermaid-diagrams and the Rust and Swift LSP plugins; Codex and
+  pi get pstack.
+
 ## Layout
 
 ```
@@ -52,6 +57,13 @@ so a second run does not lose your current setup.
 tmpz.zsh-theme      prompt line (oh-my-zsh theme)
 Brewfile            dependencies
 install.sh          symlinks everything into place
+agents-setup.sh     Node, plus skills and plugins for Claude Code, Codex and pi
+.claude/
+  AGENTS.md         instructions for all three agents (linked into ~/.claude, ~/.codex, ~/.pi/agent)
+  CLAUDE.md         imports AGENTS.md for Claude Code
+  settings.json     copied once; Claude Code writes to it
+  hooks/            rtk command rewrite
+  memory/           Claude Code memory for sessions started in $HOME
 .config/
   ghostty/config
   nvim/             full LazyVim config, incl. lazy-lock.json

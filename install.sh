@@ -31,8 +31,13 @@ link "$DOTFILES/.config/nvim"           "$HOME/.config/nvim"
 link "$DOTFILES/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 link "$DOTFILES/.config/tmux/help.sh"   "$HOME/.config/tmux/help.sh"
 
-# Claude Code: instructions, hook, status line, and the memory for sessions started in $HOME
-for f in CLAUDE.md LANGUAGE.md MEMORY-PROTOCOL.md statusline-command.sh hooks/rtk-rewrite.sh; do
+# Coding agents: one instruction file for Claude Code, Codex and pi
+link "$DOTFILES/.claude/AGENTS.md" "$HOME/.claude/AGENTS.md"
+link "$DOTFILES/.claude/AGENTS.md" "$HOME/.codex/AGENTS.md"
+link "$DOTFILES/.claude/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
+
+# Claude Code: hook, status line, and the memory for sessions started in $HOME
+for f in CLAUDE.md statusline-command.sh hooks/rtk-rewrite.sh; do
   link "$DOTFILES/.claude/$f" "$HOME/.claude/$f"
 done
 link "$DOTFILES/.claude/memory" "$HOME/.claude/projects/$(echo "$HOME" | sed 's/[^A-Za-z0-9]/-/g')/memory"
