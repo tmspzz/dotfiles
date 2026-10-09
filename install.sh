@@ -31,6 +31,18 @@ link "$DOTFILES/.config/nvim"           "$HOME/.config/nvim"
 link "$DOTFILES/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 link "$DOTFILES/.config/tmux/help.sh"   "$HOME/.config/tmux/help.sh"
 
+# Claude Code: instructions, hook, status line, and the memory for sessions started in $HOME
+for f in CLAUDE.md LANGUAGE.md MEMORY-PROTOCOL.md statusline-command.sh hooks/rtk-rewrite.sh; do
+  link "$DOTFILES/.claude/$f" "$HOME/.claude/$f"
+done
+link "$DOTFILES/.claude/memory" "$HOME/.claude/projects/$(echo "$HOME" | sed 's/[^A-Za-z0-9]/-/g')/memory"
+
+# Claude Code writes to settings.json, so it is copied once instead of linked
+if [ ! -e "$HOME/.claude/settings.json" ]; then
+  cp "$DOTFILES/.claude/settings.json" "$HOME/.claude/settings.json"
+  echo "copied $HOME/.claude/settings.json"
+fi
+
 # tmux plugin manager (plugins install with: tmux, then Ctrl-a I)
 TPM="$HOME/.config/tmux/plugins/tpm"
 if [ ! -d "$TPM" ]; then
@@ -40,9 +52,10 @@ fi
 cat <<EOF
 
 Linked. Remaining steps:
-  1. Install tools:   brew bundle --file="$DOTFILES/Brewfile"
-  2. Set the font in Ghostty to "JetBrainsMono Nerd Font Mono" (already in the config).
-  3. Start tmux, then press Ctrl-a I to install tmux plugins.
-  4. Open nvim once; LazyVim installs its plugins on first launch.
-  5. For Rust in nvim: rustup component add rust-analyzer
+  1. Install tools and agents: brew bundle --file="$DOTFILES/Brewfile"
+  2. Install Node, pnpm, and the agents' skills and plugins: $DOTFILES/agents-setup.sh
+  3. Install Rust with rustup, then: rustup component add rust-analyzer
+  4. Set the font in Ghostty to "JetBrainsMono Nerd Font Mono" (already in the config).
+  5. Start tmux, then press Ctrl-a I to install tmux plugins.
+  6. Open nvim once; LazyVim installs its plugins on first launch.
 EOF

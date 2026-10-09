@@ -1,0 +1,6 @@
+- [Editor: Neovim + LazyVim](editor-neovim-lazyvim.md) — Ghostty and Neovim limits the config does not show
+- [Shell gotchas](shell-gotchas.md) — `ls` is `ls -Glah`, check binaries with `type`, rtk breaks npx and JSON
+- [tmux gotchas](tmux-setup.md) — never kill-server, re-set options after TPM, continuum restore, C-j
+- [dotfiles repo](dotfiles-repo.md) — public general setup on GitHub, work setup in ~/dotfiles-work
+- [asdf: Node + pnpm](asdf-node-pnpm.md) — node/pnpm under asdf, reshim after npm -g, tmux keeps old PATH
+- [~/.agents skills links](agents-skills-symlinks.md) — skills CLI installs to ~/.agents/skills; pass -a

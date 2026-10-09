@@ -9,11 +9,15 @@ prompt. Clone this repo and run `install.sh` to symlink everything into place.
 git clone https://github.com/tmspzz/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh                      # symlinks configs, backs up anything already there
-brew bundle --file=Brewfile       # installs Ghostty, Neovim, tmux, ripgrep, fd, lazygit, the font
+brew bundle --file=Brewfile       # installs Ghostty, Neovim, tmux, asdf, the coding agents and other CLI tools
 ```
 
 Then:
 
+- Run `agents-setup.sh` to install the latest Node and pnpm through asdf, then
+  the skills and plugins for Claude Code, Codex and pi. Work setup lives in a
+  separate private repo at `~/dotfiles-work`; the script runs its `setup.sh`
+  if it exists, and `.zshrc` sources `~/.zshrc.local`.
 - Start `tmux` and press `Ctrl-a` `I` to install tmux plugins.
 - Open `nvim` once; LazyVim installs its plugins on first launch.
 - For Rust in Neovim: `rustup component add rust-analyzer`.

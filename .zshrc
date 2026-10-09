@@ -110,14 +110,11 @@ export OPENSSL_LIB_DIR=$(brew --prefix openssl)/lib
 export OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include
 export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
 
-# pnpm
-export PNPM_HOME="/Users/tommasopiazza/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-export PATH="$HOME/Code/Proton/monorepo/tommaso/bin:$HOME/.local/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Machine-only settings, such as work paths, live outside the repo
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
 
 # Bare `tmux` attaches to your last session (or creates one if none exist).
 # `tmux <args>` (e.g. tmux ls, tmux new -s foo) behaves normally.
