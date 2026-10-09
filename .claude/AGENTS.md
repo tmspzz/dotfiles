@@ -60,26 +60,32 @@ Never echo real credentials, tokens, keys, PII or internal URLs. Reference by fi
 
 ## Memory
 
+Claude Code, Codex and pi share one memory: the markdown files in
+`~/.claude/projects/<slug>/memory/`. `<slug>` is the git repo root, or the working directory outside
+a repo, with every character that is not a letter or digit replaced by `-`. For example,
+`/Users/me/Code/app` becomes `-Users-me-Code-app`, also when you work in `/Users/me/Code/app/src`.
+
+Codex: leave Codex's built-in memories off, so there is one store.
+
 ### Before answering
 
-In Claude Code, check local memory: `~/.claude/projects/<project-slug>/memory/MEMORY.md` and the
-entries it links. In every agent, check `AGENTS.md` or `CLAUDE.md` in the working tree and any
-parent directories.
+- Read `MEMORY.md` in that folder and the entries it links. Claude Code loads the index on its own;
+  Codex and pi must read it before every task.
+- Check `AGENTS.md` or `CLAUDE.md` in the working tree and any parent directories.
 
 If sources disagree, tell the user about the conflict, verify against the real state (filesystem,
 git), and only then act. Do not silently prefer one source.
 
 ### After finishing a task
 
-Update local memory and the project's `AGENTS.md` or `CLAUDE.md` if they exist:
+- **Memory:** write one fact per file, with `name`, `description` and `type` (`user`, `feedback`,
+  `project` or `reference`) in the frontmatter. Add a one-line pointer to `MEMORY.md`. Read the
+  file again just before you write it, because another agent may have changed it.
+- **Project instructions:** edit `AGENTS.md` or `CLAUDE.md` in the project tree when the change is
+  project-scoped guidance. If neither exists, ask the user before creating one.
 
-- Claude Code memory under `~/.claude/projects/<project-slug>/memory/`: write the entry file and
-  add a one-line pointer to `MEMORY.md`.
-- `AGENTS.md` or `CLAUDE.md` in the project tree: edit in place when the change is project-scoped
-  guidance.
-
-If they don't exist, do not silently create them. Tell the user that one would help here and ask
-whether to create it.
+The memory for sessions started in `$HOME` (`-Users-<name>`) is published in a public dotfiles
+repo. Never save work facts, hosts, paths or people there.
 
 ### What NOT to write
 
