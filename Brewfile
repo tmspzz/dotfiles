@@ -24,7 +24,6 @@ brew "asdf"
 # git
 brew "git"
 brew "git-lfs"      # large file storage
-brew "glab"         # GitLab CLI
 brew "gnupg"        # signs commits (git config commit.gpgsign true)
 brew "pinentry-mac" # macOS dialog for the GPG passphrase
 
