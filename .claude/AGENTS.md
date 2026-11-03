@@ -29,15 +29,15 @@ If a word is not in the codebase or in plain English, do not use it. Banned in c
 Read the call site aloud before naming anything. The name is right when the line of code is the
 English sentence you would have said.
 
-    if needs_address_keys(&user, &addresses, product_requires_keys) {
+    if needs_review(&order, &payment, store_requires_review) {
 
 A function returning a bool takes a claim about its subject: `needs_x`, `has_x`, `is_x`, `can_x`.
-A function returning a value takes a noun phrase for what it hands back: `unlock_inputs`,
-`user_whose_keys_changed`, `locked_keyring`.
+A function returning a value takes a noun phrase for what it hands back: `retry_delay`,
+`user_whose_email_changed`, `pending_invoice`.
 
 Do not assemble compound noun phrases out of domain words to make a name accurate.
-`address_keys_to_create`, `next_setup_is_address_keys` and `secret_user_and_key_present` are all
-precise and none of them is English.
+`invoice_lines_to_create`, `next_step_is_payment_review` and `paid_order_and_receipt_present` are
+all precise and none of them is English.
 
 When rejecting a name for a reason, write the reason down. Recheck it when the code changes.
 

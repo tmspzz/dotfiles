@@ -22,6 +22,18 @@ link() {
 # shell + prompt line
 link "$DOTFILES/.zshrc"  "$HOME/.zshrc"
 link "$DOTFILES/.bashrc" "$HOME/.bashrc"
+
+# oh-my-zsh loads the prompt theme. A ~/.oh-my-zsh without oh-my-zsh.sh only holds
+# links from an earlier run of this script, so it is backed up and cloned fresh.
+# Cloned directly because the official installer replaces ~/.zshrc.
+OMZ="$HOME/.oh-my-zsh"
+if [ ! -f "$OMZ/oh-my-zsh.sh" ]; then
+  if [ -e "$OMZ" ]; then
+    mv "$OMZ" "$OMZ.bak-$STAMP"
+    echo "backed up $OMZ -> $OMZ.bak-$STAMP"
+  fi
+  git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$OMZ"
+fi
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 link "$DOTFILES/tmpz.zsh-theme" "$ZSH_CUSTOM/themes/tmpz.zsh-theme"
 
@@ -59,8 +71,7 @@ cat <<EOF
 Linked. Remaining steps:
   1. Install tools and agents: brew bundle --file="$DOTFILES/Brewfile"
   2. Install Node, pnpm, and the agents' skills and plugins: $DOTFILES/agents-setup.sh
-  3. Install Rust with rustup, then: rustup component add rust-analyzer
-  4. Set the font in Ghostty to "JetBrainsMono Nerd Font Mono" (already in the config).
-  5. Start tmux, then press Ctrl-a I to install tmux plugins.
-  6. Open nvim once; LazyVim installs its plugins on first launch.
+  3. Set the font in Ghostty to "JetBrainsMono Nerd Font Mono" (already in the config).
+  4. Start tmux, then press Ctrl-a I to install tmux plugins.
+  5. Open nvim once; LazyVim installs its plugins on first launch.
 EOF

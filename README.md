@@ -8,7 +8,7 @@ prompt. Clone this repo and run `install.sh` to symlink everything into place.
 ```sh
 git clone https://github.com/tmspzz/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install.sh                      # symlinks configs, backs up anything already there
+./install.sh                      # symlinks configs, backs up anything already there, clones oh-my-zsh
 brew bundle --file=Brewfile       # installs Ghostty, Neovim, tmux, asdf, the coding agents and other CLI tools
 ```
 
@@ -16,14 +16,10 @@ Then:
 
 - Run `agents-setup.sh` to install the latest Node and pnpm through asdf, then
   the skills and plugins for Claude Code, Codex and pi. Work setup lives in a
-  separate private repo at `~/dotfiles-work`; the script runs its `setup.sh`
-  if it exists, and `.zshrc` sources `~/.zshrc.local`.
+  separate private repo, `dotfiles-work`, cloned next to this one; the script
+  runs its `setup.sh` if it exists, and `.zshrc` sources `~/.zshrc.local`.
 - Start `tmux` and press `Ctrl-a` `I` to install tmux plugins.
 - Open `nvim` once; LazyVim installs its plugins on first launch.
-- For Rust in Neovim: `rustup component add rust-analyzer`.
-- oh-my-zsh is required for the prompt: install it from https://ohmyz.sh if it is
-  not already present, then re-run `install.sh` so the theme links into
-  `~/.oh-my-zsh/custom/themes`.
 
 `install.sh` moves any existing file to `<path>.bak-<timestamp>` before linking,
 so a second run does not lose your current setup.
@@ -46,8 +42,7 @@ so a second run does not lose your current setup.
 
 - **Coding agents**: Claude Code, Codex and pi from brew. All three read
   `.claude/AGENTS.md` and get the same skills. Claude Code also gets pstack,
-  plannotator, mermaid-diagrams and the Rust and Swift LSP plugins; Codex and
-  pi get pstack.
+  plannotator and mermaid-diagrams; Codex and pi get pstack.
 
 ## Layout
 

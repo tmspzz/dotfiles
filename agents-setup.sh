@@ -4,6 +4,8 @@
 # Re-running is safe.
 set -euo pipefail
 
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # bash does not read ~/.zshrc, so put asdf's shims on PATH here
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$PATH"
 
@@ -38,17 +40,16 @@ claude plugin marketplace add softaworks/agent-toolkit
 claude plugin install pstack@pstack-claude
 claude plugin install plannotator@plannotator
 claude plugin install mermaid-diagrams@agent-toolkit
-claude plugin install rust-analyzer-lsp@claude-plugins-official
-claude plugin install swift-lsp@claude-plugins-official
 
 # pstack for Codex and pi
 codex plugin marketplace add michael-denyer/pstack-claude
 codex plugin add pstack@pstack-claude
 pi install git:github.com/michael-denyer/pstack-claude
 
-# Work setup lives in a separate private repo
-if [ -x "$HOME/dotfiles-work/setup.sh" ]; then
-  "$HOME/dotfiles-work/setup.sh"
+# Work setup lives in a separate private repo next to this one
+WORK="$(dirname "$DOTFILES")/dotfiles-work"
+if [ -x "$WORK/setup.sh" ]; then
+  "$WORK/setup.sh"
 fi
 
 cat <<'EOF'
@@ -56,7 +57,5 @@ cat <<'EOF'
 Agents are set up. Manual steps left:
   1. Sign in on first run of each agent: claude, codex, pi.
   2. Restart Claude Code so the new plugins load.
-  3. Rust LSP: install Rust with rustup, then: rustup component add rust-analyzer
-  4. Swift LSP: install Xcode, which ships sourcekit-lsp.
-  5. Optional: run /pstack:setup-pstack in Claude Code to pick pstack's models.
+  3. Optional: run /pstack:setup-pstack in Claude Code to pick pstack's models.
 EOF

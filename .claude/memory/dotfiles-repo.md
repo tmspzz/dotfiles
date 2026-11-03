@@ -19,9 +19,11 @@ The user's general setup is versioned in **github.com/tmspzz/dotfiles** (branch 
 - `agents-setup.sh` installs the latest Node and pnpm through asdf, then the skills for all three agents and the Claude
   Code plugins. Skills that have an installer are installed, not copied into the repo.
 
-Work setup lives in a separate private repo at `~/dotfiles-work`: work shell settings, work Claude Code rules in
-`~/.claude/rules/`, work plugins and work tools. `.zshrc` sources `~/.zshrc.local` and `agents-setup.sh`
-runs `~/dotfiles-work/setup.sh` when they exist. Never commit work hosts, paths or tools to the public repo.
+Work setup lives in a separate private repo, `dotfiles-work`, cloned as a sibling of `dotfiles`: work shell
+settings, work Claude Code rules in `~/.claude/rules/`, work plugins and work tools. Each repo's scripts find the
+other as `../dotfiles` or `../dotfiles-work`, never under `$HOME`. `.zshrc` sources `~/.zshrc.local` and
+`agents-setup.sh` runs `../dotfiles-work/setup.sh` when they exist.
+Never commit work hosts, paths or tools to the public repo.
 
 The live configs on this machine may still be real files, not links to the repo. Before you commit, diff the live files
 against the repo. See [[editor-neovim-lazyvim]] and [[tmux-setup]].
